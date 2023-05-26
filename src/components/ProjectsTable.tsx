@@ -13,19 +13,30 @@ export const ProjectsTable = ({ projects }: Props) => {
     <table className={'table'}>
       <thead>
         <tr>
-          <th scope="col">Number</th>
-          <th scope="col">Name</th>
           <th scope="col" colSpan={2}>
-            Color
+            Project
           </th>
         </tr>
       </thead>
       <tbody>
         {projects.map((project) => (
           <tr key={`project_${project.id}`}>
-            <td>{project.id}</td>
-            <td>{project.name}</td>
-            <td>{project.color}</td>
+            <td>
+              <div style={{ display: 'flex' }}>
+                <div
+                  style={{
+                    backgroundColor: project.color,
+                    border: '1pt solid lightgrey',
+                    width: '20pt',
+                    marginRight: '10pt',
+                    borderRadius: '2pt',
+                  }}
+                >
+                  &nbsp;
+                </div>
+                {project.name}
+              </div>
+            </td>
             <td>
               <div style={{ float: 'right' }}>
                 <button

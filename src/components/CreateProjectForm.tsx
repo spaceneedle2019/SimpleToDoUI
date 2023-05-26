@@ -70,7 +70,10 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
                     style={{ width: '150pt', marginRight: '10pt' }}
                   />
                   {meta.touched && meta.error && (
-                    <small style={{ color: 'darkred', marginLeft: '4px' }}>
+                    <small
+                      className="text-danger"
+                      style={{ marginLeft: '4px' }}
+                    >
                       {meta.error}
                     </small>
                   )}
@@ -91,7 +94,10 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
                     }}
                   />
                   {meta.touched && meta.error && (
-                    <small style={{ color: 'darkred', marginLeft: '4px' }}>
+                    <small
+                      className="text-danger"
+                      style={{ marginLeft: '4px' }}
+                    >
                       {meta.error}
                     </small>
                   )}
