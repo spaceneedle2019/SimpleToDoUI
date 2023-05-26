@@ -1,13 +1,16 @@
 html,
 body {
-    margin: 5pt;
+  margin: 5pt;
 }
 
-h1, h2, h3, h4 {
-    margin-top: 20pt;
-    margin-bottom: 15pt;
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 20pt;
+  margin-bottom: 15pt;
 }
 
 main {
-    margin-top: 20pt;
+  margin-top: 20pt;
 }
