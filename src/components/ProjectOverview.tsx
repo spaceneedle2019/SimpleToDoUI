@@ -20,7 +20,7 @@ export const ProjectOverview = ({ initialProjects }: Props) => {
 
   useEffect(() => {
     if (projectsChanged) {
-      refetchProjects()
+      refetchProjects().then()
       setProjectsChanged(false)
     }
   }, [projectsChanged])

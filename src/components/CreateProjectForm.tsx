@@ -9,7 +9,7 @@ import {
 } from '@/api/project'
 import { object, string, ZodError } from 'zod'
 import { UnexpectedResponseError } from '@/api/client'
-import { ChromePicker } from 'react-color'
+import { SketchPicker } from 'react-color'
 import { useState } from 'react'
 
 type FormValues = Omit<Project, 'id'>
@@ -103,7 +103,7 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
                         }}
                         onClick={() => setShowColorPicker(false)}
                       />
-                      <ChromePicker
+                      <SketchPicker
                         color={color}
                         onChange={(e) => setColor(e.hex)}
                       />
@@ -118,6 +118,7 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
                       width: '150pt',
                       marginRight: '10pt',
                     }}
+                    readOnly
                     value={color}
                     onClick={() => setShowColorPicker(!showColorPicker)}
                   />

@@ -12,11 +12,9 @@ export const ProjectsTable = ({ projects, onProjectDelete }: Props) => {
     onProjectDelete(true)
   }
 
-  return projects.length === 0 ? (
-    <div className="alert alert-info" style={{ padding: '8px' }} role="alert">
-      No projects found.
-    </div>
-  ) : (
+  if (projects.length == 0) return null
+
+  return (
     <table className={'table'}>
       <thead>
         <tr>
