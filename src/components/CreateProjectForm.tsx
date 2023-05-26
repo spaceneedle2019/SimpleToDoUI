@@ -9,6 +9,8 @@ import {
 } from '@/api/project'
 import { object, string, ZodError } from 'zod'
 import { UnexpectedResponseError } from '@/api/client'
+import { ChromePicker } from 'react-color'
+import { useState } from 'react'
 
 type FormValues = Omit<Project, 'id'>
 
@@ -17,6 +19,9 @@ type Props = {
 }
 
 export const CreateProjectForm = ({ onProjectCreate }: Props) => {
+  const [showColorPicker, setShowColorPicker] = useState(false)
+  const [color, setColor] = useState('#00000')
+
   const handleFormSubmit = async (values: FormValues) => {
     const { name, color } = values
     try {
@@ -80,9 +85,30 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
                 </div>
               )}
             </Field>
-            <Field name="color">
+            <Field name="color" initialValue={color}>
               {({ input, meta }) => (
                 <div>
+                  {showColorPicker ? (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        zIndex: '100',
+                        top: '140pt',
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: 'fixed',
+                          inset: 0,
+                        }}
+                        onClick={() => setShowColorPicker(false)}
+                      />
+                      <ChromePicker
+                        color={color}
+                        onChange={(e) => setColor(e.hex)}
+                      />
+                    </div>
+                  ) : null}
                   <input
                     className="form-control"
                     type="text"
@@ -92,6 +118,8 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
                       width: '150pt',
                       marginRight: '10pt',
                     }}
+                    value={color}
+                    onClick={() => setShowColorPicker(!showColorPicker)}
                   />
                   {meta.touched && meta.error && (
                     <small
