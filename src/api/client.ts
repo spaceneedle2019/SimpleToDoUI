@@ -2,8 +2,11 @@ import { Project, ProjectsResponse } from '@/api/project'
 import { simpleToDoEndpoint } from '@/env'
 
 export class ApiClient {
-  async getProjects(): Promise<Project[]> {
-    const response = await fetch(`${simpleToDoEndpoint()}/projects`)
+  async getProjects(clientSideRequest?: boolean): Promise<Project[]> {
+    const baseUrl = clientSideRequest ? '/api' : simpleToDoEndpoint()
+    const response = await fetch(`${baseUrl}/projects`, {
+      cache: 'no-store',
+    })
 
     if (!response.ok) {
       handleErrorResponse(response)

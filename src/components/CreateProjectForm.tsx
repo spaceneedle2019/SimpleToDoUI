@@ -1,14 +1,38 @@
 'use client'
 import { Form, Field } from 'react-final-form'
 import type { ValidationErrors } from 'final-form'
-import { Project } from '@/api/project'
+import {
+  ColorInvalidError,
+  createProject,
+  NameAlreadyTakenError,
+  Project,
+} from '@/api/project'
 import { object, string, ZodError } from 'zod'
+import { UnexpectedResponseError } from '@/api/client'
 
 type FormValues = Omit<Project, 'id'>
 
-export const CreateProjectForm = () => {
+type Props = {
+  onProjectCreate: (value: boolean) => void
+}
+
+export const CreateProjectForm = ({ onProjectCreate }: Props) => {
   const handleFormSubmit = async (values: FormValues) => {
-    alert(`name: ${values.name}, color: ${values.color}`)
+    const { name, color } = values
+    try {
+      await createProject({ name, color })
+      onProjectCreate(true)
+    } catch (error) {
+      if ((error as Error).constructor === NameAlreadyTakenError) {
+        return { ['FINAL_FORM/form-error']: 'Name is already taken.' }
+      }
+      if ((error as Error).constructor === ColorInvalidError) {
+        return { ['FINAL_FORM/form-error']: 'Color is invalid.' }
+      }
+      if ((error as Error).constructor === UnexpectedResponseError) {
+        return { ['FINAL_FORM/form-error']: 'Unknown error occurs.' }
+      }
+    }
   }
 
   const projectObject = object({
@@ -83,9 +107,17 @@ export const CreateProjectForm = () => {
               Create Project
             </button>
             {submitError && (
-              <div className="alert alert-error" role="alert">
+              <small
+                className="alert alert-danger"
+                style={{
+                  alignItems: 'flex-start',
+                  marginLeft: '10pt',
+                  padding: '8px',
+                }}
+                role="alert"
+              >
                 {submitError}
-              </div>
+              </small>
             )}
           </div>
         </form>

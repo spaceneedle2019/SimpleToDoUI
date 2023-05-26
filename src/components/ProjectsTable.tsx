@@ -6,7 +6,7 @@ export type Props = {
 
 export const ProjectsTable = ({ projects }: Props) => {
   return projects.length === 0 ? (
-    <div className="alert alert-info" role="alert">
+    <div className="alert alert-info" style={{ padding: '8px' }} role="alert">
       No projects found.
     </div>
   ) : (

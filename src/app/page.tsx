@@ -1,17 +1,14 @@
 import { ApiClient } from '@/api/client'
 import { Project } from '@/api/project'
-import { ProjectsTable } from '@/components/ProjectsTable'
-import { CreateProjectForm } from '@/components/CreateProjectForm'
+import { ProjectOverview } from '@/components/ProjectOverview'
 
 const Page = async () => {
   const client = new ApiClient()
-  const projects: Project[] = await client.getProjects()
+  const initialProjects: Project[] = await client.getProjects()
   return (
     <div className={'container-fluid'}>
       <h3>Projects</h3>
-
-      <CreateProjectForm />
-      <ProjectsTable projects={projects} />
+      <ProjectOverview initialProjects={initialProjects} />
     </div>
   )
 }
