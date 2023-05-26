@@ -138,7 +138,7 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
               disabled={hasValidationErrors || !dirty}
               style={{ alignSelf: 'flex-start' }}
             >
-              Create Project
+              Create
             </button>
             {submitError && (
               <small

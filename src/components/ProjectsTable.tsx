@@ -1,10 +1,17 @@
-import { Project } from '@/api/project'
+import { deleteProject, Project } from '@/api/project'
+import { Trash3 } from 'react-bootstrap-icons'
 
 export type Props = {
   projects: Project[]
+  onProjectDelete: (value: boolean) => void
 }
 
-export const ProjectsTable = ({ projects }: Props) => {
+export const ProjectsTable = ({ projects, onProjectDelete }: Props) => {
+  const handleProjectDelete = async (id: number) => {
+    await deleteProject(id)
+    onProjectDelete(true)
+  }
+
   return projects.length === 0 ? (
     <div className="alert alert-info" style={{ padding: '8px' }} role="alert">
       No projects found.
@@ -40,14 +47,12 @@ export const ProjectsTable = ({ projects }: Props) => {
             <td>
               <div style={{ float: 'right' }}>
                 <button
+                  title="Delete project"
                   type="button"
-                  style={{ marginRight: '10pt' }}
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-danger btn-sm"
+                  onClick={() => handleProjectDelete(project.id)}
                 >
-                  Edit
-                </button>
-                <button type="button" className="btn btn-danger btn-sm">
-                  Delete
+                  <Trash3 />
                 </button>
               </div>
             </td>

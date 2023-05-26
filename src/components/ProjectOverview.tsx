@@ -11,7 +11,7 @@ type Props = {
 
 export const ProjectOverview = ({ initialProjects }: Props) => {
   const [projects, setProjects] = useState(initialProjects)
-  const [projectCreated, setProjectCreated] = useState(false)
+  const [projectsChanged, setProjectsChanged] = useState(false)
 
   const refetchProjects = async () => {
     const client = new ApiClient()
@@ -19,16 +19,16 @@ export const ProjectOverview = ({ initialProjects }: Props) => {
   }
 
   useEffect(() => {
-    if (projectCreated) {
+    if (projectsChanged) {
       refetchProjects()
-      setProjectCreated(false)
+      setProjectsChanged(false)
     }
-  }, [projectCreated])
+  }, [projectsChanged])
 
   return (
     <>
-      <CreateProjectForm onProjectCreate={setProjectCreated} />
-      <ProjectsTable projects={projects} />
+      <CreateProjectForm onProjectCreate={setProjectsChanged} />
+      <ProjectsTable projects={projects} onProjectDelete={setProjectsChanged} />
     </>
   )
 }

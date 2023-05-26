@@ -52,3 +52,14 @@ export const createProject = async ({
   const { data }: ProjectResponse = await response.json()
   return data
 }
+
+export const deleteProject = async (id: number) => {
+  const response = await fetch(`api/projects/${id}`, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'DELETE',
+  })
+
+  if (!response.ok) {
+    throw new UnexpectedResponseError(response)
+  }
+}
