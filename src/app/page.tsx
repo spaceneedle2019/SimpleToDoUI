@@ -7,6 +7,4 @@ const Page = async () => {
   const projects: Project[] = await client.getProjects()
   return <ProjectsTable projects={projects} />
 }
-
-Page.displayName = 'Page'
 export default Page

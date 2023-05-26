@@ -23,6 +23,4 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     </body>
   </html>
 )
-
-RootLayout.displayName = 'RootLayout'
 export default RootLayout
