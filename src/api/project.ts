@@ -1,10 +1,12 @@
-import { UnexpectedResponseError } from '@/api/client'
+import { UnexpectedResponseError } from './client'
 
 export type Project = {
   id: number
   name: string
   color: string
 }
+
+export type CreateProjectParams = Omit<Project, 'id'>
 
 export type ProjectsResponse = {
   data: Project[]
@@ -26,7 +28,7 @@ export class ColorInvalidError extends Error {}
 export const createProject = async ({
   name,
   color,
-}: Omit<Project, 'id'>): Promise<Project> => {
+}: CreateProjectParams): Promise<Project> => {
   const response = await fetch('api/projects', {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',

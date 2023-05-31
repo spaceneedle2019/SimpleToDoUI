@@ -1,5 +1,5 @@
-import { Project, ProjectsResponse } from '@/api/project'
-import { simpleToDoEndpoint } from '@/env'
+import { Project, ProjectsResponse } from './project'
+import { simpleToDoEndpoint } from '../env'
 
 export class ApiClient {
   async getProjects(clientSideRequest?: boolean): Promise<Project[]> {
