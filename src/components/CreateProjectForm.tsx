@@ -4,15 +4,13 @@ import type { ValidationErrors } from 'final-form'
 import {
   ColorInvalidError,
   createProject,
+  CreateProjectParams,
   NameAlreadyTakenError,
-  Project,
 } from '@/api/project'
 import { object, string, ZodError } from 'zod'
 import { UnexpectedResponseError } from '@/api/client'
 import { SketchPicker } from 'react-color'
 import { useState } from 'react'
-
-type FormValues = Omit<Project, 'id'>
 
 type Props = {
   onProjectCreate: (value: boolean) => void
@@ -22,7 +20,7 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [color, setColor] = useState('#00000')
 
-  const handleFormSubmit = async (values: FormValues) => {
+  const handleFormSubmit = async (values: CreateProjectParams) => {
     const { name, color } = values
     try {
       await createProject({ name, color })
@@ -48,7 +46,7 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
     ),
   })
 
-  const validate = (values: FormValues): ValidationErrors => {
+  const validate = (values: CreateProjectParams): ValidationErrors => {
     try {
       projectObject.parse(values)
     } catch (err) {
