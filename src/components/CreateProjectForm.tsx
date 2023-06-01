@@ -6,11 +6,28 @@ import {
   createProject,
   CreateProjectParams,
   NameAlreadyTakenError,
-} from '@/api/project'
+} from '../api/project'
 import { object, string, ZodError } from 'zod'
-import { UnexpectedResponseError } from '@/api/client'
+import { UnexpectedResponseError } from '../api/client'
 import { SketchPicker } from 'react-color'
 import { useState } from 'react'
+
+const projectObject = object({
+  name: string({ required_error: 'required' }).min(1, 'required'),
+  color: string({ required_error: 'required' }).length(
+    7,
+    'must have 7 characters'
+  ),
+})
+
+export const validate = (values: CreateProjectParams): ValidationErrors => {
+  try {
+    projectObject.parse(values)
+  } catch (err) {
+    return (err as ZodError).formErrors.fieldErrors
+  }
+  return {}
+}
 
 type Props = {
   onProjectCreate: (value: boolean) => void
@@ -36,23 +53,6 @@ export const CreateProjectForm = ({ onProjectCreate }: Props) => {
         return { ['FINAL_FORM/form-error']: 'Unknown error occurs.' }
       }
     }
-  }
-
-  const projectObject = object({
-    name: string({ required_error: 'required' }).min(1, 'required'),
-    color: string({ required_error: 'required' }).length(
-      7,
-      'must have 7 characters'
-    ),
-  })
-
-  const validate = (values: CreateProjectParams): ValidationErrors => {
-    try {
-      projectObject.parse(values)
-    } catch (err) {
-      return (err as ZodError).formErrors.fieldErrors
-    }
-    return {}
   }
 
   return (
