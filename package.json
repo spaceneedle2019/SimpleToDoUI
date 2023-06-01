@@ -12,7 +12,9 @@
     "prettier": "prettier --check --ignore-path=.gitignore .",
     "prettier:fix": "prettier --write --ignore-path=.gitignore .",
     "test": "jest",
-    "test:check": "jest && next lint && prettier --check --ignore-path=.gitignore ."
+    "test:check": "jest && next lint && prettier --check --ignore-path=.gitignore .",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@types/node": "20.2.3",
@@ -30,6 +32,13 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.18",
+    "@storybook/addon-interactions": "^7.0.18",
+    "@storybook/addon-links": "^7.0.18",
+    "@storybook/blocks": "^7.0.18",
+    "@storybook/nextjs": "^7.0.18",
+    "@storybook/react": "^7.0.18",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -39,12 +48,14 @@
     "eslint-config-next": "13.4.3",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-storybook": "^0.6.12",
     "fetch-mock-jest": "^1.5.1",
     "jest": "^29.5.0",
     "jest-canvas-mock": "^2.5.1",
     "jest-environment-jsdom": "^29.5.0",
     "node-fetch": "2.6.11",
     "prettier": "^2.8.8",
+    "storybook": "^7.0.18",
     "ts-jest": "^29.1.0"
   }
 }
