@@ -1,9 +1,9 @@
 'use client'
-import { CreateProjectForm } from '@/components/CreateProjectForm'
-import { ProjectsTable } from '@/components/ProjectsTable'
-import { Project } from '@/api/project'
 import { useEffect, useState } from 'react'
-import { ApiClient } from '@/api/client'
+import { CreateProjectForm } from '../components/CreateProjectForm'
+import { ProjectsTable } from '../components/ProjectsTable'
+import { Project } from '../api/project'
+import { ApiClient } from '../api/client'
 
 type Props = {
   initialProjects: Project[]

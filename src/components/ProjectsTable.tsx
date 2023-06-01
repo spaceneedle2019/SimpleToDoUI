@@ -1,4 +1,4 @@
-import { deleteProject, Project } from '@/api/project'
+import { deleteProject, Project } from '../api/project'
 import { Trash3 } from 'react-bootstrap-icons'
 
 export type Props = {
