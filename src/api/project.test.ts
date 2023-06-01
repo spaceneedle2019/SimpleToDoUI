@@ -1,5 +1,4 @@
 import fetchMock from 'fetch-mock-jest'
-import { describe, it, expect, beforeEach } from '@jest/globals'
 import {
   mockedErrorResponse,
   mockedProject,
@@ -8,7 +7,7 @@ import {
 import { createProject, CreateProjectParams, deleteProject } from './project'
 
 describe('createProject', () => {
-  beforeEach(() => {
+  afterEach(() => {
     fetchMock.reset()
   })
 

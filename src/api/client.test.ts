@@ -1,5 +1,4 @@
 import fetchMock from 'fetch-mock-jest'
-import { describe, it, expect } from '@jest/globals'
 import { ApiClient } from './client'
 import { mockedProjects, mockedProjectsResponse } from '../mocks/projects'
 
